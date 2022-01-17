@@ -48,7 +48,6 @@ public class Main{
      }
      else if(top.state==2)
      {
-       pair top =st.peek();
        idx++;
        if(arr[idx]!=null)
        {
