@@ -107,6 +107,32 @@ public class Main {
     return dia;
 
   }
+  static class DiaPair{
+    int Dia;
+    int Height;
+  }
+  public static DiaPair diameter2(Node node)
+  {
+    if(node==null)
+    {
+      DiaPair basePair = new DiaPair();
+      basePair.Height = -1;
+      basePair.Dia = 0;
+      return basePair;
+    }
+    DiaPair lp = diameter2(node.left); // It will give max height and dia of left node of the binary tree
+    DiaPair rp = diameter2(node.right); // It will give max height and dia of right node of the binary tree
+    
+    DiaPair mp = new DiaPair();
+
+    mp.Height = Math.max(lp.Height, rp.Height)+1;
+
+    int factorEachSide = lp.Height+rp.Height+2;
+    mp.Dia = Math.max(factorEachSide,Math.max(lp.Dia,rp.Dia));
+
+    return mp;
+
+  }
 
   public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -123,9 +149,8 @@ public class Main {
 
     Node root = construct(arr);
 
-    int diameter = 0;
-    diameter = diameter1(root);
-    System.out.println(diameter);
+    DiaPair dp = diameter2(root);
+    System.out.println(dp.Dia);
   }
 
 }
